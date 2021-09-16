@@ -17,6 +17,7 @@
 ))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![cfg_attr(docsrs, allow(unused_attributes))]
+#![feature(type_name_of_val)]
 
 //! A runtime for writing reliable network applications without compromising speed.
 //!

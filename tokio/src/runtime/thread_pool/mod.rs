@@ -69,6 +69,13 @@ impl ThreadPool {
         F: Future,
     {
         let mut enter = crate::runtime::enter(true);
+        let future = async move {
+            // use crate::future::trace::InstrumentedFuture;
+            // dbg!(InstrumentedFuture::id(&future));
+            dbg!(std::any::type_name_of_val(&future));
+            let output = crate::time::timeout(std::time::Duration::from_secs(1), future).await.unwrap();
+            output
+        };
         enter.block_on(future).expect("failed to park thread")
     }
 }

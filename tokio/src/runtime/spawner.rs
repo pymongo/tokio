@@ -29,6 +29,10 @@ impl Spawner {
         F: Future + Send + 'static,
         F::Output: Send + 'static,
     {
+        let future = async move {
+            let output = crate::time::timeout(std::time::Duration::from_secs(1), future).await.unwrap();
+            output
+        };
         match self {
             Spawner::Basic(spawner) => spawner.spawn(future),
             #[cfg(feature = "rt-multi-thread")]
